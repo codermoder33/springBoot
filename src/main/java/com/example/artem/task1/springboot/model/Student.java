@@ -6,21 +6,41 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Setter
 @Getter
-@Builder
 @Entity
 public class Student {
     @Id
     @GeneratedValue
-    int id;
-    String firstName;
-    String lastName;
-    LocalDate dateOfBirth;
+    public Integer id;
+
+    @Column
+    public String firstName;
+
+    @Column
+    public String lastName;
+
+    @Column
+    public LocalDate dateOfBirth;
+
     @Transient
-    int age;
+    public int age;
+
     @Column(unique = true)
-    String email;
+    public String email;
+
     public Student(){}
+
+    public Student(String firstName, String email, int age){
+        this.firstName=firstName;
+        this.email=email;
+        this.age=age;
+
+    }
+
+    public int getAge() {
+        return Period.between(dateOfBirth, LocalDate.now()).getYears();
+    }
 }

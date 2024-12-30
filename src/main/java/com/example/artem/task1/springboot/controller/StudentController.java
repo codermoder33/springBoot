@@ -9,36 +9,32 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/students")
-public class FirstController {
+public class StudentController {
     @Autowired
-    StudentService service;
+    private StudentService service;
 
     @GetMapping
-    public List<Student> findAllStudents(){
-       return service.findAllStudents();
+    public List<Student> index(){
+        return service.findAllStudents();
     }
 
-    @PostMapping("/save_Student")
-
-    public void saveStudent(@RequestBody Student student){
-       service.saveStudent(student);
-
+    @PostMapping
+    public Student createStudent(@RequestBody Student student){
+       return service.saveStudent(student);
     }
 
     @GetMapping("/{email}")
-    public Student findByEmail(@PathVariable("email") String email){
+    public Student showStudentByEmail(@PathVariable("email") String email){
         return service.findByEmail(email);
-
     }
-    @PostMapping("/update_Student")
 
+    @PutMapping
     public Student updateStudent(@RequestBody Student student){
         return service.updateStudent(student);
-
     }
-    @DeleteMapping("/delete_Student/{email}")
 
-    public void updateStudent(@PathVariable String email){
+    @DeleteMapping("/{email}")
+    public void destroyStudent(@PathVariable String email){
         service.deleteStudent(email);
     }
 }
