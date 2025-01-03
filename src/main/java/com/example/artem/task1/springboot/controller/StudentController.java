@@ -1,8 +1,11 @@
 package com.example.artem.task1.springboot.controller;
 
+import com.example.artem.task1.springboot.exeptions.NoSuchStudentExeption;
 import com.example.artem.task1.springboot.model.Student;
 import com.example.artem.task1.springboot.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,8 +17,8 @@ public class StudentController {
     private StudentService service;
 
     @GetMapping
-    public List<Student> index(){
-        return service.findAllStudents();
+    public List<Student> getStudents(){
+        return service.getStudents();
     }
 
     @PostMapping
@@ -23,9 +26,9 @@ public class StudentController {
        return service.saveStudent(student);
     }
 
-    @GetMapping("/{email}")
-    public Student showStudentByEmail(@PathVariable("email") String email){
-        return service.findByEmail(email);
+    @GetMapping("/{id}")
+    public Student showStudentById(@PathVariable("id") int id){
+        return service.findById(id);
     }
 
     @PutMapping
@@ -33,8 +36,8 @@ public class StudentController {
         return service.updateStudent(student);
     }
 
-    @DeleteMapping("/{email}")
-    public void destroyStudent(@PathVariable String email){
-        service.deleteStudent(email);
+    @DeleteMapping("/{id}")
+    public boolean destroyStudent(@PathVariable("id") int id){
+        return service.deleteStudent(id);
     }
 }
