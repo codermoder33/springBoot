@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/students")
@@ -28,16 +29,26 @@ public class StudentController {
 
     @GetMapping("/{id}")
     public Student showStudentById(@PathVariable("id") int id){
-        return service.findById(id);
+        Optional<Student> o = service.findById(id);
+        if(o.isPresent()) return o.get();
+        throw new NoSuchStudentExeption();
     }
 
     @PutMapping
     public Student updateStudent(@RequestBody Student student){
-        return service.updateStudent(student);
+        Optional<Student> o = service.updateStudent(student);
+        if(o.isPresent()) return o.get();
+        throw new NoSuchStudentExeption();
     }
 
     @DeleteMapping("/{id}")
     public boolean destroyStudent(@PathVariable("id") int id){
         return service.deleteStudent(id);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handlerExeption(NoSuchStudentExeption n){
+        return new ResponseEntity<>(n.getMessage(), HttpStatus.BAD_REQUEST);
+
     }
 }

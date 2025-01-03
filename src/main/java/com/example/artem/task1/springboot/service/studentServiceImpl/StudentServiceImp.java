@@ -28,27 +28,20 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public Student findById(int id) {
-        Optional<Student> o = repository.findById(id);
-        if(o.isPresent()) return o.get();
-        throw new NoSuchStudentExeption();
+    public Optional<Student> findById(int id) {
+        return repository.findById(id);
+
     }
 
     @Override
-    public Student updateStudent(Student student) {
-        Optional<Student> o = repository.updateStudent(student);
-        if(o.isPresent()) return o.get();
-        throw new NoSuchStudentExeption();
+    public Optional<Student> updateStudent(Student student) {
+        return repository.updateStudent(student);
+
     }
 
     @Override
     public boolean deleteStudent(int id) {
         return repository.deleteStudent(id);
-
-    }
-    @ExceptionHandler
-    public ResponseEntity<String> handlerExeption(NoSuchStudentExeption n){
-        return new ResponseEntity<>(n.getMessage(), HttpStatus.BAD_REQUEST);
 
     }
 }
