@@ -11,33 +11,33 @@ import java.util.stream.IntStream;
 @Repository
 public class StudentRepository {
   private List<Student> base = new ArrayList<>();
-  int COUNTER=1;
+  private int lastID =1;
 
     public List<Student> getStudents() {
         return List.of(
-                new Student(COUNTER++,"Oleg", "fsdf@mail.ru"),
-                new Student(COUNTER++,"Anna", "fsdsdff@mail.ru"),
-                new Student(COUNTER++,"Holg", "fsdgfdgd@mail.ru")
+                new Student(lastID++,"Oleg", "fsdf@mail.ru"),
+                new Student(lastID++,"Anna", "fsdsdff@mail.ru"),
+                new Student(lastID++,"Holg", "fsdgfdgd@mail.ru")
         );
     }
     public Student saveStudent(Student s) {
-        s.setId(COUNTER++);
+        s.setId(lastID++);
         base.add(s);
         return s;
     }
     public Optional<Student> findById(int id) {
-         Optional<Student> op = base.stream().filter(a->a.getId()==id).findFirst();
-         return op;
+        return base.stream()
+                 .filter(a->a.getId()==id)
+                 .findFirst();
     }
     public Optional<Student> updateStudent(Student student) {
-        int g = IntStream.range(0,base.size()).filter(a->base.get(a).equals(student)).findFirst().orElse(-1);
-        if(g==-1) return Optional.ofNullable(null);
-        base.set(g,student);
-        return Optional.of(student);
+        int i = base.indexOf(student);        // реализован метод hashcode-equals по id
+        if(i>-1) base.set(i,student);
+        return Optional.ofNullable(i>-1?student:null);
     }
     public boolean deleteStudent(int id) {
-        var s = findById(id);
-        return base.remove(s);
+        Optional<Student> o = findById(id);
+        return base.removeIf(s->o.isPresent()&&s.equals(o.get()));
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.artem.task1.springboot.exeptions;
+package com.example.artem.task1.springboot.exeptionHandling;
 
 public class NoSuchStudentExeption extends RuntimeException{
     public NoSuchStudentExeption(){

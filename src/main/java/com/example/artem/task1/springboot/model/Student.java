@@ -35,6 +35,7 @@ public class Student {
         this.firstName=firstName;
         this.email=email;
     }
+
     public Student(int id, String firstName, String email){
         this.id=id;
         this.firstName=firstName;

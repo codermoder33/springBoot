@@ -1,6 +1,6 @@
 package com.example.artem.task1.springboot.controller;
 
-import com.example.artem.task1.springboot.exeptions.NoSuchStudentExeption;
+import com.example.artem.task1.springboot.exeptionHandling.NoSuchStudentExeption;
 import com.example.artem.task1.springboot.model.Student;
 import com.example.artem.task1.springboot.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +29,15 @@ public class StudentController {
 
     @GetMapping("/{id}")
     public Student showStudentById(@PathVariable("id") int id){
-        Optional<Student> o = service.findById(id);
-        if(o.isPresent()) return o.get();
-        throw new NoSuchStudentExeption();
+        return service.findById(id)
+                .orElseThrow( NoSuchStudentExeption::new);
     }
 
     @PutMapping
     public Student updateStudent(@RequestBody Student student){
-        Optional<Student> o = service.updateStudent(student);
-        if(o.isPresent()) return o.get();
-        throw new NoSuchStudentExeption();
+        return service.updateStudent(student)
+                .orElseThrow(NoSuchStudentExeption::new);
+
     }
 
     @DeleteMapping("/{id}")
@@ -46,9 +45,4 @@ public class StudentController {
         return service.deleteStudent(id);
     }
 
-    @ExceptionHandler
-    public ResponseEntity<String> handlerExeption(NoSuchStudentExeption n){
-        return new ResponseEntity<>(n.getMessage(), HttpStatus.BAD_REQUEST);
-
-    }
 }
