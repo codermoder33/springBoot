@@ -1,14 +1,10 @@
 package com.example.artem.task1.springboot.service.studentServiceImpl;
 
-import com.example.artem.task1.springboot.exeptions.NoSuchStudentExeption;
 import com.example.artem.task1.springboot.repository.StudentRepository;
 import com.example.artem.task1.springboot.model.Student;
 import com.example.artem.task1.springboot.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 import java.util.Optional;
