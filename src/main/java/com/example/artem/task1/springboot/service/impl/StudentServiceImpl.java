@@ -1,8 +1,8 @@
-package com.example.artem.task1.springbootg.service.impl;
+package com.example.artem.task1.springboot.service.impl;
 
-import com.example.artem.task1.springbootg.model.Student;
-import com.example.artem.task1.springbootg.repository.StudentRepository;
-import com.example.artem.task1.springbootg.service.StudentService;
+import com.example.artem.task1.springboot.model.Student;
+import com.example.artem.task1.springboot.repository.StudentRepository;
+import com.example.artem.task1.springboot.service.StudentService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +14,7 @@ import java.util.Optional;
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepository repository;
+
     @Override
     @Transactional
     public List<Student> getStudents() {
@@ -28,23 +29,14 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public Optional<Student> findById(int id) {
-        return repository.findById(id);
-
-    }
+    public Optional<Student> findById(int id) { return repository.findById(id); }
 
     @Override
     @Transactional
-    public Optional<Student> updateStudent(Student student) {
-        return Optional.of(repository.save(student));
-
-    }
+    public Optional<Student> updateStudent(Student student) { return Optional.of(repository.save(student));}
 
     @Override
     @Transactional
-    public boolean deleteStudent(int id) {
-        return repository.deleteById(id);
-
-    }
+    public boolean deleteStudent(int id) { return repository.deleteById(id); }
 }
 

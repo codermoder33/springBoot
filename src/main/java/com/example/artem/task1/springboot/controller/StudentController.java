@@ -1,8 +1,8 @@
-package com.example.artem.task1.springbootg.controller;
+package com.example.artem.task1.springboot.controller;
 
-import com.example.artem.task1.springbootg.exception_handling.NoSuchStudentException;
-import com.example.artem.task1.springbootg.model.Student;
-import com.example.artem.task1.springbootg.service.StudentService;
+import com.example.artem.task1.springboot.exception_handling.NoSuchStudentException;
+import com.example.artem.task1.springboot.model.Student;
+import com.example.artem.task1.springboot.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +34,6 @@ public class StudentController {
     public Student updateStudent(@RequestBody Student student){
         return service.updateStudent(student)
                 .orElseThrow(()->new NoSuchStudentException(student.getId()));
-
     }
 
     @DeleteMapping("/{id}")
