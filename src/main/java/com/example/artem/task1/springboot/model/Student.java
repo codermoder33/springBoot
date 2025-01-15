@@ -1,7 +1,6 @@
 package com.example.artem.task1.springboot.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,16 +30,11 @@ public class Student {
 
     public Student(){}
 
-    public Student(String firstName, String email){
-        this.firstName=firstName;
-        this.email=email;
-    }
 
     public Student(int id, String firstName, String email){
         this.id=id;
         this.firstName=firstName;
         this.email=email;
-
     }
 
     public int getAge() {
