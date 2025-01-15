@@ -16,27 +16,22 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository repository;
 
     @Override
-    @Transactional
     public List<Student> getStudents() {
         return repository.findAll();
     }
 
     @Override
-    @Transactional
     public Student saveStudent(Student student) {
         return repository.save(student);
     }
 
     @Override
-    @Transactional
     public Optional<Student> findById(int id) { return repository.findById(id); }
 
     @Override
-    @Transactional
     public Optional<Student> updateStudent(Student student) { return Optional.of(repository.save(student));}
 
     @Override
-    @Transactional
     public boolean deleteStudent(int id) { return repository.deleteById(id); }
 }
 
