@@ -12,8 +12,13 @@ import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
+
+    private final StudentRepository repository;
+
     @Autowired
-    private StudentRepository repository;
+    public StudentServiceImpl(StudentRepository repository){
+        this.repository=repository;
+    }
 
     @Override
     public List<Student> getStudents() {
