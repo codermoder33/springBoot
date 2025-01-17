@@ -1,9 +1,12 @@
 package com.example.artem.task1.springboot.controller;
 
+import com.example.artem.task1.springboot.dto.StudentGetDto;
+import com.example.artem.task1.springboot.dto.StudentCreateDto;
 import com.example.artem.task1.springboot.exception.NoSuchStudentException;
 import com.example.artem.task1.springboot.model.Student;
 import com.example.artem.task1.springboot.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,25 +22,24 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getStudents(){
+    public List<StudentGetDto> getStudents(){
         return service.getStudents();
     }
 
     @PostMapping
-    public Student createStudent(@RequestBody Student student){
+    public StudentGetDto createStudent(@RequestBody StudentCreateDto student){
         return service.saveStudent(student);
     }
 
     @GetMapping("/{id}")
-    public Student showStudentById(@PathVariable("id") int id){
+    public StudentGetDto showStudentById(@PathVariable("id") int id){
         return service.findById(id)
                 .orElseThrow(()->new NoSuchStudentException(id));
     }
 
     @PutMapping
-    public Student updateStudent(@RequestBody Student student){
-        return service.updateStudent(student)
-                .orElseThrow(()->new NoSuchStudentException(student.getId()));
+    public StudentGetDto updateStudent(@RequestBody Student student){
+        return service.updateStudent(student);
     }
 
     @DeleteMapping("/{id}")
