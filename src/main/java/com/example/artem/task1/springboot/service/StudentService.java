@@ -1,16 +1,20 @@
 package com.example.artem.task1.springboot.service;
+import com.example.artem.task1.springboot.dto.StudentGetDto;
+import com.example.artem.task1.springboot.dto.StudentCreateDto;
 import com.example.artem.task1.springboot.model.Student;
+import org.springframework.http.HttpStatus;
+
 import java.util.List;
 import java.util.Optional;
 
 public interface StudentService {
-    List<Student> getStudents();
+    List<StudentGetDto> getStudents();
 
-    Student saveStudent(Student s);
+    StudentGetDto saveStudent(StudentCreateDto s);
 
-    Optional<Student> findById(int id);
+    Optional<StudentGetDto> findById(int id);
 
-    Optional<Student> updateStudent(Student student);
+    StudentGetDto updateStudent(Student student);
 
     boolean deleteStudent(int id);
 }
